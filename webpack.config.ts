@@ -1,11 +1,12 @@
 import { buildWebpack } from "./config/build/buildWebpack";
-import { BuildMode, BuildPaths } from "./config/build/types/types";
+import { BuildMode, BuildPaths, BuildPlatform } from "./config/build/types/types";
 import path from "path";
 
 interface EnvVars {
-  mode: BuildMode;
-  port: number;
-  analyzer: boolean;
+  mode?: BuildMode;
+  port?: number;
+  analyzer?: boolean;
+  platform?: BuildPlatform;
 }
 
 export default (env: EnvVars) => {
@@ -14,6 +15,7 @@ export default (env: EnvVars) => {
     html: path.resolve(__dirname, "public", "index.html"),
     output: path.resolve(__dirname, "build"),
     src: path.resolve(__dirname, "src"),
+    public: path.resolve(__dirname, "public"),
   }
 
   return buildWebpack({
@@ -21,5 +23,6 @@ export default (env: EnvVars) => {
     paths,
     mode: env.mode,
     analyzer: env.analyzer ?? false,
+    platform: env.platform ?? BuildPlatform.DESKTOP,
   });
 }

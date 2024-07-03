@@ -1,8 +1,8 @@
 import { createRoot } from "react-dom/client";
-import App from "./components/App/App";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { About } from "@/pages/About";
 import { Shop } from "@/pages/Shop";
+import App from "@/components/App/App";
 import { Suspense } from "react";
 
 
