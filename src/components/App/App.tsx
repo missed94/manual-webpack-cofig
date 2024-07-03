@@ -5,8 +5,8 @@ import imagesPng from "@/assets/images.png";
 import imagesJpg from "@/assets/cover.jpg";
 import ImagesSvg from "@/assets/social-icons.svg";
 
-
-function TODO(a: number) {
+//tree shaking
+function TODO() {
   console.log("TODOFUNCTION");
 }
 
@@ -16,8 +16,8 @@ export const App = () => {
     setCounter((prev) => prev + 1);
   }
   return (
-    <div>
-      <h1>PLATFORM={__PLATFORM__}</h1>
+    <div data-testid={"App-data-test-id"}>
+      <h1 data-testid={"Platform"}>PLATFORM={__PLATFORM__}</h1>
       <div>
         <img width={100} height={100} src={imagesPng} alt="lol1"/>
         <img width={100} height={100} src={imagesJpg} alt="lol2"/>

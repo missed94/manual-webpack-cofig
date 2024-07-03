@@ -21,7 +21,7 @@ export function buildWebpack(options: BuildOptions): webpack.Configuration {
         rules: buildLoaders(options), //loaders (важен порядок!)
       },
       resolve: buildResolvers(options), // указываем расширения которые необходимо обработать
-      devtool: isDev && "inline-source-map",
+      devtool: isDev ? "inline-source-map" : "source-map", // для адекватного дебагинга, есть возможность увидеть код как он написан, а не скомпиленный
       devServer: isDev ? buildDevServer(options) : undefined, // для обновления в реалтайме
     }
 }

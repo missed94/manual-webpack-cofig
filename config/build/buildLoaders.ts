@@ -2,6 +2,7 @@ import { ModuleOptions } from "webpack";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import ReactRefreshTypeScript from "react-refresh-typescript";
 import { BuildMode, BuildOptions } from "./types/types";
+import { buildBabelLoader } from "./babel/buildBabelLoader";
 
 export function buildLoaders(options: BuildOptions): ModuleOptions["rules"] {
   const isDev = options.mode === BuildMode.DEVELOPMENT;
@@ -75,21 +76,7 @@ export function buildLoaders(options: BuildOptions): ModuleOptions["rules"] {
     exclude: /node_modules/, // то что не обрабатывается
   }
 
-  const babelLoader = {
-    test: /\.tsx?$/, //обрабатывает ts и tsx
-    exclude: /node_modules/,
-    use: {
-      loader: "babel-loader",
-      // options можно вынести в отдельный файл babel.config.json, можно писать здесь
-      options: {
-        presets: [
-          '@babel/preset-env',
-          "@babel/preset-typescript", // для обработки TS
-          ["@babel/preset-react", { runtime: isDev ? "automatic" : "classic" }] // для обработки React
-        ]
-      }
-    }
-  }
+  const babelLoader = buildBabelLoader(options);
 
   return [
     svgLoader,
